@@ -76,7 +76,7 @@ class customHandler(OSSHandler):
         for func_call in function_calls:
             name = func_call['name']
             params = func_call['parameters']
-            decoded_output_executable.append(f"{name}({','.join([f'{k}:{repr(v)}' for k, v in params.items()])})")
+            decoded_output_executable.append(f"{name}({','.join([f'{k}={repr(v)}' for k, v in params.items()])})")
         return decoded_output_executable
     
     
