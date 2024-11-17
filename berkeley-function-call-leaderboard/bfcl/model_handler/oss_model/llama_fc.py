@@ -48,9 +48,9 @@ class LlamaFCHandler(OSSHandler):
         {{- "Cutting Knowledge Date: December 2023\n" }}
         {{- "Today Date: " + date_string + "\n\n" }}
         {%- if tools is not none and not tools_in_user_message %}
-            {{- "You have access to the following functions. To call a function, please respond with JSON for a function call." }}
-            {{- 'Respond in the format {"name": function name, "parameters": dictionary of argument name and its value}.' }}
-            {{- "Do not use variables.\n\n" }}
+            {{- "You have access to the following functions." }}
+            {{- 'Respond in the format {{"name": function name, "arguments": dictionary of argument name and its value}}\n' }}
+            {{- "You SHOULD NOT include any other text in the response.\n\n" }}
             {%- for t in tools %}
                 {{- t | tojson(indent=4) }}
                 {{- "\n\n" }}
@@ -148,12 +148,12 @@ class LlamaFCHandler(OSSHandler):
             if message["role"] == "user" and is_first_user_message:
                 is_first_user_message = False
                 formatted_prompt += "<|start_header_id|>user<|end_header_id|>\n\n"
-                formatted_prompt += "Given the following functions, please respond with a JSON for a function call "
+                formatted_prompt += "Given the following functions, respond with a valid JSON format  "
                 formatted_prompt += (
                     "with its proper arguments that best answers the given prompt.\n\n"
                 )
-                formatted_prompt += 'Respond in the format {"name": function name, "parameters": dictionary of argument name and its value}.'
-                formatted_prompt += "Do not use variables.\n\n"
+                formatted_prompt += 'Respond in the format {{"name": function name, "arguments": dictionary of argument name and its value}}.'
+                formatted_prompt += "You SHOULD NOT include any other text in the response.\n\n"
                 for func in function:
                     formatted_prompt += json.dumps(func, indent=4) + "\n\n"
                 formatted_prompt += f"{message['content'].strip()}<|eot_id|>"
@@ -193,7 +193,8 @@ class LlamaFCHandler(OSSHandler):
         decoded_output = []
         for func_call in function_calls:
             name = func_call["name"]
-            params = func_call["parameters"]
+            params_dict = func_call["parameters"]
+            params = params_dict['properties']
             decoded_output.append({name: params})
 
         return decoded_output
