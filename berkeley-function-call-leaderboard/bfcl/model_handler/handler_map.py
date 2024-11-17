@@ -87,7 +87,7 @@ api_inference_handler_map = {
 
 # Inference through local hosting
 local_inference_handler_map = {
-    "Tasneem10/Llama3.2-1B-instruct-fc": OSSHandler,
+    "Tasneem10/Llama3.2-1B-instruct-fc": customHandler,
     "google/gemma-2-2b-it": GemmaHandler,
     "google/gemma-2-9b-it": GemmaHandler,
     "google/gemma-2-27b-it": GemmaHandler,
