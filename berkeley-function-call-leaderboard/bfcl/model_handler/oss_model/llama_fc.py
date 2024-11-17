@@ -193,7 +193,8 @@ class LlamaFCHandler(OSSHandler):
         decoded_output = []
         for func_call in function_calls:
             name = func_call["name"]
-            params = func_call["parameters"]
+            params_dict = func_call["parameters"]
+            params = params_dict['properties']
             decoded_output.append({name: params})
 
         return decoded_output
@@ -212,7 +213,8 @@ class LlamaFCHandler(OSSHandler):
         execution_list = []
         for func_call in function_calls:
             name = func_call["name"]
-            params = func_call["parameters"]
+            params_dict = func_call["parameters"]
+            params = params_dict['properties']
             execution_list.append(
                 f"{name}({','.join([f'{k}={repr(v)}' for k,v in params.items()])})"
             )
