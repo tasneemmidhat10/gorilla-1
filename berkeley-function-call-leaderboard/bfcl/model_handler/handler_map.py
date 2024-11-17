@@ -24,7 +24,7 @@ from bfcl.model_handler.proprietary_model.nvidia import NvidiaHandler
 from bfcl.model_handler.proprietary_model.openai import OpenAIHandler
 from bfcl.model_handler.proprietary_model.yi import YiHandler
 from bfcl.model_handler.proprietary_model.gogoagent import GoGoAgentHandler
-from bfcl.model_handler.oss_model.base_oss_handler import OSSHandler
+from bfcl.model_handler.oss_model.customHandler import customHandler
 
 # TODO: Add Deepseek V2, meta-llama/Llama-3.1-405B-Instruct
 
