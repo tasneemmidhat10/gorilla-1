@@ -1,8 +1,8 @@
 from bfcl.model_handler.handler_map import local_inference_handler_map
 
 MODEL_METADATA_MAPPING = {
-    "Tasneem10_Llama3.2-1B-instruct-fc": [
-        "Tasneem10_Llama3.2-1B-instruct-fc",
+    "Tasneem10/Llama3.2-1B-instruct-fc": [
+        "Tasneem10/Llama3.2-1B-instruct-fc",
         'https://huggingface.co/Tasneem10/Llama3.2-1B-instruct-fc',
         "Meta",
         "Meta Llama 3 Community",
