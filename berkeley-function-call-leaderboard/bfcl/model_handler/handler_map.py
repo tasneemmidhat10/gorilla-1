@@ -24,6 +24,7 @@ from bfcl.model_handler.proprietary_model.nvidia import NvidiaHandler
 from bfcl.model_handler.proprietary_model.openai import OpenAIHandler
 from bfcl.model_handler.proprietary_model.yi import YiHandler
 from bfcl.model_handler.proprietary_model.gogoagent import GoGoAgentHandler
+from bfcl.model_handler.oss_model.base_oss_handler import OSSHandler
 
 # TODO: Add Deepseek V2, meta-llama/Llama-3.1-405B-Instruct
 
@@ -86,7 +87,7 @@ api_inference_handler_map = {
 
 # Inference through local hosting
 local_inference_handler_map = {
-    "Tasneem10/Llama3.2-1B-instruct-fc": LlamaFCHandler,
+    "Tasneem10/Llama3.2-1B-instruct-fc": OSSHandler,
     "google/gemma-2-2b-it": GemmaHandler,
     "google/gemma-2-9b-it": GemmaHandler,
     "google/gemma-2-27b-it": GemmaHandler,
