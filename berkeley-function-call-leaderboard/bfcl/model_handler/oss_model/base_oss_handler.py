@@ -247,22 +247,7 @@ class OSSHandler(BaseHandler):
     #### Prompting methods ####
 
     def _format_prompt(self, message, function):
-        formatted_prompt = "<|begin_of_text|>"
-        system_prompt = ''
-        remaining_message =message
-        if message[0]['role'] == 'system':
-            system_prompt = message[0]['content'].strip()
-            remaining_message = message[1:]
-        formatted_prompt += "<|start_header_id|>user<|end_header_id|>\n\n"
-        formatted_prompt += system_prompt + f' Based on the question, you will need to make one or more function/tool calls to achieve the purpose.  If none of the functions can be used, point it out. If the given question lacks the parameters required by the function,also point it out. You should only return the function call in tools call sections.
-        If you decide to invoke any of the function(s), you MUST put it in the format of {{"name": function name, "Parameters": A dictionary containing the arguments name and their values}}. Here is a list of functions in JSON format that you can invoke. {function} ' + '<|eot_id|>\n'
-        if remaining_message[0]['role'] == 'user':
-            formatted_prompt+= '<|start_header_id|>user<|end_header_id|>' + remaining_message[0]['content'].strip()
-        else:
-            formatted_prompt+= '<|start_header_id|>user<|end_header_id|>' + message[1]['content'].strip() + '<|eot_id|>'
-        formatted_prompt+= '<|start_header_id|>assistant<|end_header_id|>'
-        return formatted_prompt
-
+      raise NotImplementedError
 
         
 
