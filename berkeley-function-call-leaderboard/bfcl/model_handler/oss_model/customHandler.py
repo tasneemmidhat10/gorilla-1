@@ -5,7 +5,20 @@ class customHandler(OSSHandler):
     def __init__(self, model_name, temperature) -> None:
         super().__init__(model_name, temperature)
     
-    def _format_prompt(self, message, function):
+    def _format_prompt(self, message, functions):
+        if isinstance(functions, dict):
+            function = []
+            function_name = functions['name']
+            params = functions['parameters']['properties']
+            function.append({f"{function_name}:{params}"})
+            return function
+        elif isinstance(functions, list):
+            function = []
+            for func in functions:
+                function_name = func['name']
+                params = func['parameters']['properties']
+                function.append(f"{function_name}: {params}")
+                return function
         formatted_prompt = "<|begin_of_text|>"
         system_prompt = ''
         remaining_message =message
@@ -13,24 +26,7 @@ class customHandler(OSSHandler):
             system_prompt = message[0]['content'].strip()
             remaining_message = message[1:]
         formatted_prompt += "<|start_header_id|>user<|end_header_id|>\n\n"
-        prompt = f"""Based on the question, you must make one or more function/tool calls to achieve the purpose. If none of the functions can be used, point it out. If the given question lacks the parameters the function requires, also point it out. You should only return the function call in the tools call sections. The expected functions have the following format:
-        {{
-            "name": "function_name",
-            "description": "function description",
-            "parameters": {{
-                "type": "dict",
-                "properties": {{
-                    "parameter1_name": {{
-                        "type": "parameter type",
-                        "description": "The description of the parameter"
-                        }},
-                        "parameter2_name": {{
-                            "type": "parameter type",
-                            "description": "parameter description"
-                            }}
-                        }}
-                    }}
-        }}
+        prompt = f"""Based on the question, you must make one or more function/tool calls to achieve the purpose. If none of the functions can be used, point it out. If the given question lacks the parameters the function requires, also point it out. You should only return the function call in the tools call sections.
         If you decide to invoke any of the function(s), you MUST strictly put it in the format of:
         {{
             "name": "function_name",
@@ -61,7 +57,7 @@ class customHandler(OSSHandler):
         for func_call in function_calls:
             name = func_call['function_name']
             params = func_call['parameters']
-            decoded_output.append({name:params})
+            decoded_output.append(json.loads(f"{name}:{params}"))
         return decoded_output
     def decode_execute(self, result):
         result = result.replace('<|python_tag|>', '')
