@@ -10,7 +10,7 @@ class customHandler(OSSHandler):
             function = ''
             function_name = functions['name']
             params = functions['parameters']['properties']
-            function= f"{function_name}:{params}"}
+            function= f"{function_name}:{params}"
             return function
         elif isinstance(functions, list):
             function = ''
