@@ -7,17 +7,17 @@ class customHandler(OSSHandler):
     
     def _format_prompt(self, message, functions):
         if isinstance(functions, dict):
-            function = []
+            function = ''
             function_name = functions['name']
             params = functions['parameters']['properties']
-            function.append({f"{function_name}:{params}"})
+            function= f"{function_name}:{params}"}
             return function
         elif isinstance(functions, list):
-            function = []
+            function = ''
             for func in functions:
                 function_name = func['name']
                 params = func['parameters']['properties']
-                function.append(f"{function_name}: {params}")
+                function = f"{function_name}: {params}"
                 return function
         formatted_prompt = "<|begin_of_text|>"
         system_prompt = ''
@@ -57,7 +57,7 @@ class customHandler(OSSHandler):
         for func_call in function_calls:
             name = func_call['function_name']
             params = func_call['parameters']
-            decoded_output.append(json.loads(f"{name}:{params}"))
+            decoded_output.append(f"{name}:{params}")
         return decoded_output
     def decode_execute(self, result):
         result = result.replace('<|python_tag|>', '')
