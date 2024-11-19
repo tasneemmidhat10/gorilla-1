@@ -7,6 +7,12 @@ MODEL_METADATA_MAPPING = {
         "Meta",
         "Meta Llama 3 Community",
     ],
+    "Tasneem10/Llama3.2-1B-instruct-fc": [
+        "Tasneem10/Llama3.2-1B-instruct-fc",
+        'https://huggingface.co/Tasneem10/Llama3.2-1B-instruct-v1-fc',
+        "Meta",
+        "Meta Llama 3 Community",
+    ],
     "o1-preview-2024-09-12": [
         "o1-preview-2024-09-12 (Prompt)",
         "https://openai.com/index/introducing-openai-o1-preview/",
