@@ -7,7 +7,7 @@ MODEL_METADATA_MAPPING = {
         "Meta",
         "Meta Llama 3 Community",
     ],
-    "Tasneem10/Llama3.2-1B-instruct-fc": [
+    "Tasneem10/Llama3.2-1B-instruct-v1-fc": [
         "Tasneem10/Llama3.2-1B-instruct-fc",
         'https://huggingface.co/Tasneem10/Llama3.2-1B-instruct-v1-fc',
         "Meta",
